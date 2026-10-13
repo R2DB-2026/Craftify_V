@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Match Report · Demo (27 ก.ย. 2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f6f7; --surface:#ffffff; --border:#e4e7ea; --text:#1d2024; --muted:#7f858e; --faint:#f1f3f5; --grid:#eceef1;
+  --green:#3b8a73; --green-soft:#a8d4c4; --green-tint:#e5f2ec; --red:#d7322e; --red-tint:#fbe8e7; --orange:#d9770f; --orange-tint:#fcefe0;
+  --blue:#2d6fd2; --focus:#2d6fd2;
+  --font:'Poppins','IBM Plex Sans Thai',system-ui,-apple-system,'Segoe UI','Noto Sans Thai',Tahoma,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121417; --surface:#1a1d21; --border:#2a2f35; --text:#e7e9ec; --muted:#959ca5; --faint:#22262b; --grid:#272c32;
+    --green:#58b596; --green-soft:#2f6b5a; --green-tint:#17302a; --red:#ef5b55; --red-tint:#3a1e1d; --orange:#f0983f; --orange-tint:#3a2a18;
+    --blue:#6a9ff0; --focus:#6a9ff0; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121417; --surface:#1a1d21; --border:#2a2f35; --text:#e7e9ec; --muted:#959ca5; --faint:#22262b; --grid:#272c32;
+  --green:#58b596; --green-soft:#2f6b5a; --green-tint:#17302a; --red:#ef5b55; --red-tint:#3a1e1d; --orange:#f0983f; --orange-tint:#3a2a18;
+  --blue:#6a9ff0; --focus:#6a9ff0; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-left:20px;padding-right:20px}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:6px}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--border)}
+.bar{display:flex;align-items:center;gap:16px;padding-top:14px;padding-bottom:6px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:8px;font-size:20px;font-weight:600;letter-spacing:-.01em}
+.brand .sub{font-size:13px;font-weight:400;color:var(--muted)}
+.meta{margin-left:auto;display:flex;gap:14px;color:var(--muted);font-size:13px;flex-wrap:wrap}
+.meta b{color:var(--text);font-weight:600;margin-left:4px}
+.meta b.pos{color:var(--green)}
+.theme{border:1px solid var(--border);background:var(--surface);border-radius:8px;padding:4px 10px;font-size:12px;color:var(--muted);cursor:pointer}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{appearance:none;border:0;background:none;padding:10px 12px 12px;color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;font-size:14px}
+.tab:hover{color:var(--text)}
+.tab[aria-selected="true"]{color:var(--text);font-weight:500;border-bottom-color:var(--text)}
+.tab.extra{color:var(--green)}
+.tab.extra[aria-selected="true"]{border-bottom-color:var(--green);color:var(--green)}
+.demo{font-size:12.5px;color:var(--muted);padding-top:12px}
+.demo span{display:inline-block;background:var(--orange-tint);color:var(--orange);border-radius:6px;padding:2px 8px;margin-right:8px;font-weight:500}
+
+/* layout */
+main{padding-top:18px;padding-bottom:48px}
+.sec-h{margin:6px 0 14px}
+.sec-h h2{margin:0;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.sec-h p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:14px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px}
+.stat .l{font-size:12.5px;color:var(--muted)}
+.stat .v{font-size:20px;font-weight:600;margin-top:2px;font-variant-numeric:tabular-nums}
+.stat .s{font-size:12px;color:var(--muted)}
+.stat .v.good{color:var(--green)} .stat .v.bad{color:var(--red)}
+.flag{display:inline-block;font-size:11px;font-weight:500;border-radius:5px;padding:1px 6px;background:var(--orange-tint);color:var(--orange);margin-left:6px;vertical-align:2px}
+.grid{display:grid;gap:12px;margin-bottom:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g21{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+@media (max-width:860px){.g21{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;min-width:0}
+.panel h3{margin:0;font-size:15px;font-weight:600}
+.panel .ps{margin:2px 0 12px;color:var(--muted);font-size:12.5px}
+.note{font-size:12px;color:var(--muted);margin-top:8px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* bars list */
+.brow{margin:10px 0}
+.brow .bl{display:flex;justify-content:space-between;font-size:13.5px}
+.brow .m{color:var(--muted);font-variant-numeric:tabular-nums}
+.track{height:7px;background:var(--faint);border-radius:6px;margin-top:5px;overflow:hidden}
+.track i{display:block;height:100%;border-radius:6px}
+.split{height:9px;border-radius:6px;overflow:hidden;display:flex;background:var(--faint);margin:6px 0 4px}
+.split i{display:block;height:100%}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+.kv div{font-size:12px;color:var(--muted)}
+.kv b{display:block;font-size:15px;color:var(--text);font-weight:600}
+
+/* charts */
+svg.chart{width:100%;height:auto;display:block;overflow:visible}
+svg .gl{stroke:var(--grid);stroke-width:1}
+svg .zero{stroke:var(--muted);stroke-width:1;opacity:.6}
+svg .ref{stroke:var(--green);stroke-width:1.2;stroke-dasharray:4 4}
+svg .tk{fill:var(--muted);font-size:11.5px;font-family:var(--font)}
+svg .vl{fill:var(--text);font-size:11.5px;font-weight:500;font-family:var(--font)}
+svg rect.bar{transition:opacity .15s}
+svg.dim rect.bar:not(.sel){opacity:.28}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+th{font-size:11.5px;font-weight:500;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);white-space:nowrap;letter-spacing:.02em}
+th.sort{cursor:pointer;user-select:none}
+th.sort:hover{color:var(--text)}
+th .arr{font-size:10px;margin-left:3px}
+td{padding:9px 10px;border-bottom:1px solid var(--faint);white-space:nowrap}
+tr.sel td{background:var(--green-tint)}
+tr.click{cursor:pointer}
+tr.click:hover td{background:var(--faint)}
+td.pos{color:var(--green)} td.neg{color:var(--red)}
+.pill{display:inline-block;border-radius:6px;padding:1px 7px;font-size:12px;font-weight:500}
+.pill.pos{background:var(--green-tint);color:var(--green)} .pill.neg{background:var(--red-tint);color:var(--red)}
+
+/* rotation cards */
+.rcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:12px}
+.rcard{appearance:none;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;cursor:pointer}
+.rcard:hover{border-color:var(--muted)}
+.rcard[aria-pressed="true"]{border-color:var(--green);box-shadow:0 0 0 1px var(--green) inset}
+.rcard .rt{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.rcard .rs{font-size:22px;font-weight:600;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.rcard .rm{font-size:11.5px;color:var(--muted)}
+
+/* hit grid */
+.hgrid td{padding:4px;border:0}
+.hgrid th{border:0;text-align:center}
+.hgrid th:first-child{text-align:left}
+.cell{min-width:64px;border-radius:7px;padding:5px 6px;text-align:center;line-height:1.25;font-size:12.5px;background:var(--faint);color:var(--muted)}
+.cell small{display:block;font-size:10.5px;opacity:.8}
+.cell.p1{background:var(--green-tint);color:var(--text)}
+.cell.p2{background:var(--green-soft);color:var(--text)}
+.cell.n1{background:var(--red-tint);color:var(--text)}
+.cell.z{background:var(--surface);border:1px solid var(--border);color:var(--text)}
+.hgrid td.colsel .cell{outline:2px solid var(--green);outline-offset:-1px}
+
+/* highlights */
+.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.chip{appearance:none;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer;color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--text);color:var(--surface);border-color:var(--text)}
+select{border:1px solid var(--border);background:var(--surface);border-radius:8px;padding:6px 10px}
+.clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.clip{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{aspect-ratio:16/9;background:var(--faint);position:relative;display:grid;place-items:center}
+.thumb svg{width:100%;height:100%;position:absolute;inset:0}
+.thumb .play{position:relative;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.55);display:grid;place-items:center}
+.clip .cb{padding:9px 11px 11px;display:flex;flex-direction:column;gap:2px;flex:1}
+.clip .ct{font-weight:500;font-size:13.5px}
+.clip .cs{font-size:12px;color:var(--muted)}
+.clip button{margin-top:8px;align-self:flex-start;border:1px solid var(--border);background:var(--surface);border-radius:8px;padding:4px 10px;font-size:12.5px;cursor:pointer}
+.clip button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.reel{position:sticky;top:calc(env(safe-area-inset-top,0px) + 120px)}
+.reel ol{margin:8px 0 0;padding-left:20px;max-height:340px;overflow:auto;font-size:13px}
+.btn{border:1px solid var(--border);background:var(--surface);border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer}
+.btn.primary{background:var(--green);border-color:var(--green);color:#fff}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+
+/* insights */
+.scn{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:12px}
+.sc{border-radius:14px;border:1px solid var(--border);background:var(--surface);padding:16px 18px}
+.sc.on{border-color:var(--orange);box-shadow:0 0 0 1px var(--orange) inset}
+.sc .badge{font-size:12px;font-weight:600;color:var(--orange)}
+.sc .badge.off{color:var(--muted)}
+.sc h4{margin:4px 0 6px;font-size:15px}
+.sc p{margin:6px 0;font-size:13px}
+.sc .ev{font-size:12.5px;color:var(--muted)}
+.tool{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;align-items:end}
+.tool label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:4px}
+.tool select,.tool input{width:100%}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px}
+.res .stat .v small{font-size:13px;color:var(--muted);font-weight:400;margin-left:6px}
+.verdict{margin-top:12px;font-size:13.5px;padding:10px 12px;border-radius:10px;background:var(--faint)}
+.pcard{margin-top:12px;border-top:1px solid var(--border);padding-top:12px}
+.pcard h4{margin:0 0 8px;font-size:15px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="bar wrap">
+    <div class="brand">Match<span class="sub">Match Report</span></div>
+    <div class="meta" aria-label="สรุปผล">
+      <span>Points For<b>60</b></span><span>Against<b>40</b></span><span>Diff<b class="pos">+20</b></span><span>Rallies<b>100</b></span>
+    </div>
+    <button class="theme" id="themeBtn" type="button" aria-label="สลับธีมสว่าง/มืด">ธีม</button>
+  </div>
+  <nav class="tabs wrap" role="tablist" id="tabs" aria-label="เมนูรายงาน"></nav>
+</header>
+<div class="wrap demo"><span>เดโม</span>หน้าจอจำลอง ใช้ข้อมูลจริงจากแมตช์ 27 ก.ย. 2026 (3 เซต, 100 rally) ส่วนคลิปในหน้า Highlights เป็นภาพตัวอย่าง</div>
+<main class="wrap" id="view" tabindex="-1"></main>
+
+<script>
+(function(){
+'use strict';
+var TEAM = {k:21,e:8,ta:70};
+var TEAM_HIT = (TEAM.k-TEAM.e)/TEAM.ta;
+
+var ROT = [
+ {r:'R1',pm:-3,pf:13,pa:16,so:[5,18],sw:[8,11],fbk:25.0,hit:-0.056,pass:1.82,ta:18},
+ {r:'R2',pm:2,pf:7,pa:5,so:[3,5],sw:[4,7],fbk:0.0,hit:0.750,pass:2.33,ta:4},
+ {r:'R3',pm:9,pf:12,pa:3,so:[3,3],sw:[9,12],fbk:0.0,hit:0.294,pass:2.50,ta:17},
+ {r:'R4',pm:7,pf:13,pa:6,so:[3,6],sw:[10,13],fbk:0.0,hit:0.167,pass:2.00,ta:18},
+ {r:'R5',pm:-1,pf:7,pa:8,so:[2,7],sw:[5,8],fbk:0.0,hit:0.100,pass:1.86,ta:10},
+ {r:'R6',pm:6,pf:8,pa:2,so:[2,2],sw:[6,8],fbk:100.0,hit:0.667,pass:3.00,ta:3}
+];
+var GRID = [
+ ['#5',[null,[1.000,1],[0.333,6],[0.250,4],[0.500,4],null]],
+ ['#9',[[1.000,1],null,[0.500,4],[0.000,2],[0.000,3],null]],
+ ['#6',[[-0.333,3],[1.000,1],[0.500,2],[0.500,4],null,null]],
+ ['#3',[[0.000,7],null,null,null,null,[1.000,1]]],
+ ['#17',[null,null,[0.000,1],[0.200,5],[0.000,1],[1.000,1]]],
+ ['#18',[[-1.000,1],[0.500,2],[0.000,3],[0.000,2],null,null]],
+ ['#8',[[0.333,3],null,null,[-1.000,1],[-0.500,2],[0.000,1]]],
+ ['#7',[[-0.500,2],null,[0.000,1],null,null,null]],
+ ['#13',[[0.000,1],null,null,null,null,null]]
+];
+var SETS = [
+ {set:'Set 1',score:'15–11',rallies:26,so:45.5,ps:66.7,hit:'+.190 (6–2/21)',pass:'1.75 (63%)',acese:'1 / 3',fbso:0.0,trans:'42.9% (7)',digs:'9 (0)',run:'8 / 4'},
+ {set:'Set 2',score:'25–16',rallies:41,so:37.5,ps:76.0,hit:'+.111 (7–4/27)',pass:'2.36 (93%)',acese:'4 / 2',fbso:12.5,trans:'28.6% (7)',digs:'9 (1)',run:'6 / 7'},
+ {set:'Set 3',score:'20–13',rallies:33,so:50.0,ps:68.4,hit:'+.273 (8–2/22)',pass:'1.69 (85%)',acese:'2 / 3',fbso:14.3,trans:'33.3% (3)',digs:'4 (3)',run:'11 / 5'}
+];
+var ATT = [
+ {p:'#5',k:7,e:1,ta:15,share:21.4},{p:'#6',k:4,e:1,ta:10,share:14.3},{p:'#17',k:3,e:1,ta:8,share:11.4},
+ {p:'#9',k:3,e:0,ta:10,share:14.3},{p:'#3',k:2,e:1,ta:8,share:11.4},{p:'#8',k:1,e:2,ta:7,share:10.0},
+ {p:'#18',k:1,e:1,ta:8,share:11.4},{p:'#7',k:0,e:1,ta:3,share:4.3},{p:'#13',k:0,e:0,ta:1,share:1.4}
+];
+ATT.forEach(function(a){a.hit=(a.k-a.e)/a.ta;a.kp=a.k/a.ta*100;a.ep=a.e/a.ta*100;});
+var PASSERS = [
+ {p:'#15',att:3,rt:2.67,pos:100,pf:2,gd:1,pr:0,er:0},{p:'#3',att:6,rt:2.17,pos:100,pf:1,gd:5,pr:0,er:0},
+ {p:'#5',att:9,rt:2.00,pos:89,pf:2,gd:6,pr:0,er:1},{p:'#2',att:7,rt:2.00,pos:71,pf:2,gd:3,pr:2,er:0},
+ {p:'#6',att:9,rt:1.56,pos:67,pf:1,gd:5,pr:1,er:2}
+];
+var SERVERS = [
+ {p:'#18',att:12,a:0,e:0,ip:12,ap:0.0,ep:0.0,ef:0.00,won:10,wp:83.3},{p:'#7',att:9,a:0,e:2,ip:7,ap:0.0,ep:22.2,ef:-0.22,won:7,wp:77.8},
+ {p:'#5',att:7,a:0,e:1,ip:6,ap:0.0,ep:14.3,ef:-0.14,won:5,wp:71.4},{p:'#9',att:6,a:1,e:0,ip:5,ap:16.7,ep:0.0,ef:0.17,won:4,wp:66.7},
+ {p:'#8',att:6,a:0,e:0,ip:6,ap:0.0,ep:0.0,ef:0.00,won:5,wp:83.3},{p:'#3',att:5,a:1,e:0,ip:4,ap:20.0,ep:0.0,ef:0.20,won:3,wp:60.0},
+ {p:'#17',att:5,a:3,e:1,ip:1,ap:60.0,ep:20.0,ef:0.40,won:4,wp:80.0},{p:'#6',att:5,a:1,e:2,ip:2,ap:20.0,ep:40.0,ef:-0.20,won:3,wp:60.0},
+ {p:'#14',att:4,a:1,e:2,ip:1,ap:25.0,ep:50.0,ef:-0.25,won:1,wp:25.0}
+];
+var DEF = [
+ {p:'#7',d:1,de:0,ds:100,bs:1,bc:6},{p:'#6',d:6,de:2,ds:75,bs:1,bc:1},{p:'#3',d:5,de:1,ds:83.3,bs:0,bc:0},
+ {p:'#14',d:2,de:0,ds:100,bs:0,bc:2},{p:'#15',d:3,de:1,ds:75,bs:0,bc:0},{p:'#17',d:0,de:0,ds:null,bs:1,bc:2},
+ {p:'#9',d:0,de:0,ds:null,bs:1,bc:2},{p:'#8',d:2,de:0,ds:100,bs:0,bc:0},{p:'#2',d:2,de:0,ds:100,bs:0,bc:0},
+ {p:'#5',d:0,de:0,ds:null,bs:0,bc:2},{p:'#18',d:1,de:0,ds:100,bs:0,bc:0}
+];
+var BOX = [
+ {p:'#5',pts:7,net:3,k:7,e:1,ta:15,hit:0.400,kp:47,sa:0,se:1,pass:2.00,re:1,digs:0,bs:0,bt:2},
+ {p:'#17',pts:7,net:5,k:3,e:1,ta:8,hit:0.250,kp:38,sa:3,se:1,pass:null,re:0,digs:0,bs:1,bt:2},
+ {p:'#6',pts:6,net:-1,k:4,e:1,ta:10,hit:0.300,kp:40,sa:1,se:2,pass:1.56,re:2,digs:6,bs:1,bt:1},
+ {p:'#9',pts:5,net:5,k:3,e:0,ta:10,hit:0.300,kp:30,sa:1,se:0,pass:null,re:0,digs:0,bs:1,bt:2},
+ {p:'#3',pts:3,net:1,k:2,e:1,ta:8,hit:0.125,kp:25,sa:1,se:0,pass:2.17,re:0,digs:5,bs:0,bt:0},
+ {p:'#7',pts:1,net:-2,k:0,e:1,ta:3,hit:-0.333,kp:0,sa:0,se:2,pass:null,re:0,digs:1,bs:1,bt:6},
+ {p:'#8',pts:1,net:-1,k:1,e:2,ta:7,hit:-0.143,kp:14,sa:0,se:0,pass:null,re:0,digs:2,bs:0,bt:0},
+ {p:'#14',pts:1,net:-1,k:0,e:0,ta:0,hit:null,kp:null,sa:1,se:2,pass:null,re:0,digs:2,bs:0,bt:2},
+ {p:'#18',pts:1,net:0,k:1,e:1,ta:8,hit:0.000,kp:13,sa:0,se:0,pass:2.00,re:0,digs:1,bs:0,bt:0},
+ {p:'#2',pts:0,net:0,k:0,e:0,ta:0,hit:null,kp:null,sa:0,se:0,pass:2.00,re:0,digs:2,bs:0,bt:0},
+ {p:'#13',pts:0,net:0,k:0,e:0,ta:1,hit:0.000,kp:0,sa:0,se:0,pass:null,re:0,digs:0,bs:0,bt:0},
+ {p:'#15',pts:0,net:-1,k:0,e:0,ta:0,hit:null,kp:null,sa:0,se:0,pass:2.67,re:0,digs:3,bs:0,bt:0}
+];
+var ACTIONS = {
+ 'Kill':{'#5':7,'#6':4,'#17':3,'#9':3,'#3':2,'#8':1,'#18':1},
+ 'Ace':{'#17':3,'#6':1,'#9':1,'#3':1,'#14':1},
+ 'Block':{'#17':1,'#6':1,'#9':1,'#7':1},
+ 'Dig':{'#6':6,'#3':5,'#15':3,'#14':2,'#8':2,'#2':2,'#7':1,'#18':1},
+ 'Attack error':{'#8':2,'#5':1,'#17':1,'#6':1,'#3':1,'#7':1,'#18':1},
+ 'Serve error':{'#6':2,'#7':2,'#14':2,'#5':1,'#17':1},
+ 'Reception error':{'#6':2,'#5':1}
+};
+var LEDGER = ROT.map(function(r){return {r:r.r, recv:r.so[0]-(r.so[1]-r.so[0]), serve:r.sw[0]-(r.sw[1]-r.sw[0])};});
+
+/* ---------- helpers ---------- */
+function hit(v){ if(v===null||v===undefined) return '—'; return (v<0?'−':'+')+Math.abs(v).toFixed(3).replace(/^0/,''); }
+function sgn(v){ return (v>0?'+':v<0?'−':'+')+Math.abs(v); }
+function pc(v,d){ if(v===null||v===undefined) return '—'; return v.toFixed(d===undefined?1:d)+'%'; }
+function cssv(n){ return 'var(--'+n+')'; }
+function stat(l,v,s,tone,flag){ return '<div class="stat"><div class="l">'+l+(flag?'<span class="flag">'+flag+'</span>':'')+'</div><div class="v '+(tone||'')+'">'+v+'</div><div class="s">'+(s||'')+'</div></div>'; }
+function panel(t,s,b,cls){ return '<section class="panel '+(cls||'')+'"><h3>'+t+'</h3>'+(s?'<p class="ps">'+s+'</p>':'<div style="height:10px"></div>')+b+'</section>'; }
+function head(t,s){ return '<div class="sec-h"><h2>'+t+'</h2><p>'+s+'</p></div>'; }
+function brow(l,n,p,c){ return '<div class="brow"><div class="bl"><span>'+l+'</span><span class="m">'+n+' · '+p+'%</span></div><div class="track"><i style="width:'+p+'%;background:'+c+'"></i></div></div>'; }
+function legend(items){ return '<div class="legend">'+items.map(function(i){return '<span><i style="background:'+i[1]+'"></i>'+i[0]+'</span>';}).join('')+'</div>'; }
+
+function vbar(o){
+  var W=560,H=o.h||240,l=44,r=12,t=18,b=o.vl?46:30,pw=W-l-r,ph=H-t-b;
+  var y=function(v){return t+(o.max-v)/(o.max-o.min)*ph;};
+  var band=pw/o.cats.length, s='<svg viewBox="0 0 '+W+' '+H+'" class="chart'+(o.sel!=null?' dim':'')+'" role="img" aria-label="'+(o.label||'')+'">';
+  o.ticks.forEach(function(tv){ s+='<line x1="'+l+'" x2="'+(W-r)+'" y1="'+y(tv)+'" y2="'+y(tv)+'" class="'+(tv===0?'zero':'gl')+'"/><text x="'+(l-8)+'" y="'+(y(tv)+4)+'" text-anchor="end" class="tk">'+(o.ft?o.ft(tv):tv)+'</text>'; });
+  if(o.ref!=null){ s+='<line x1="'+l+'" x2="'+(W-r)+'" y1="'+y(o.ref)+'" y2="'+y(o.ref)+'" class="ref"/>'; }
+  o.cats.forEach(function(c,i){
+    var v=o.vals[i], x=l+i*band+band*0.17, w=band*0.66, y0=y(Math.max(v,0)), y1=y(Math.min(v,0)), hh=Math.max(y1-y0, v===0?0:1);
+    s+='<rect class="bar'+(o.sel===i?' sel':'')+'" x="'+x+'" y="'+y0+'" width="'+w+'" height="'+hh+'" rx="4" fill="'+o.color(v,i)+'"><title>'+c+': '+(o.fv?o.fv(v):v)+'</title></rect>';
+    s+='<text x="'+(x+w/2)+'" y="'+(H-10)+'" text-anchor="middle" class="tk">'+c+'</text>';
+    if(o.vl){ s+='<text x="'+(x+w/2)+'" y="'+(v>=0?y0-6:y1+14)+'" text-anchor="middle" class="vl">'+o.fv(v)+'</text>'; }
+  });
+  return s+'</svg>';
+}
+function gbar(o){
+  var W=560,H=o.h||250,l=44,r=12,t=18,b=(o.vl&&o.min<0)?46:30,pw=W-l-r,ph=H-t-b;
+  var y=function(v){return t+(o.max-v)/(o.max-o.min)*ph;};
+  var band=pw/o.cats.length, n=o.series.length, gw=band*0.72, bw=gw/n;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" class="chart" role="img" aria-label="'+(o.label||'')+'">';
+  o.ticks.forEach(function(tv){ s+='<line x1="'+l+'" x2="'+(W-r)+'" y1="'+y(tv)+'" y2="'+y(tv)+'" class="'+(tv===0?'zero':'gl')+'"/><text x="'+(l-8)+'" y="'+(y(tv)+4)+'" text-anchor="end" class="tk">'+(o.ft?o.ft(tv):tv)+'</text>'; });
+  o.cats.forEach(function(c,i){
+    var gx=l+i*band+(band-gw)/2;
+    o.series.forEach(function(se,j){
+      var v=se.vals[i], x=gx+j*bw+1.5, w=bw-3, y0=y(Math.max(v,0)), y1=y(Math.min(v,0)), hh=Math.max(y1-y0, v===0?1:1);
+      s+='<rect x="'+x+'" y="'+y0+'" width="'+w+'" height="'+hh+'" rx="3" fill="'+se.color+'"><title>'+c+' · '+se.name+': '+(o.fv?o.fv(v):v)+'</title></rect>';
+      if(o.vl){ s+='<text x="'+(x+w/2)+'" y="'+(v>=0?y0-5:y1+13)+'" text-anchor="middle" class="vl">'+o.fv(v)+'</text>'; }
+    });
+    s+='<text x="'+(l+i*band+band/2)+'" y="'+(H-10)+'" text-anchor="middle" class="tk">'+c+'</text>';
+  });
+  return s+'</svg>';
+}
+function donut(parts,big,sub){
+  var R=62,C=2*Math.PI*R,tot=parts.reduce(function(a,p){return a+p.n;},0),off=0;
+  var s='<svg viewBox="0 0 170 170" class="chart" style="max-width:190px" role="img" aria-label="Pass quality distribution"><g transform="rotate(-90 85 85)">';
+  parts.forEach(function(p){ var len=p.n/tot*C; s+='<circle cx="85" cy="85" r="'+R+'" fill="none" stroke="'+p.c+'" stroke-width="20" stroke-dasharray="'+(len-1.5)+' '+(C-len+1.5)+'" stroke-dashoffset="'+(-off)+'"><title>'+p.l+': '+p.n+'</title></circle>'; off+=len; });
+  s+='</g><text x="85" y="72" text-anchor="middle" class="tk">RATING</text><text x="85" y="96" text-anchor="middle" style="font-size:24px;font-weight:600;fill:var(--text);font-family:var(--font)">'+big+'</text><text x="85" y="114" text-anchor="middle" class="tk">'+sub+'</text></svg>';
+  return s;
+}
+function radar(cats,series){
+  var cx=170,cy=150,R=110,n=cats.length;
+  var pt=function(i,v){var a=-Math.PI/2+i*2*Math.PI/n;return [cx+Math.cos(a)*R*v/100, cy+Math.sin(a)*R*v/100];};
+  var s='<svg viewBox="0 0 340 300" class="chart" style="max-width:380px;margin:0 auto" role="img" aria-label="Phase comparison by rotation">';
+  [25,50,75,100].forEach(function(lv){ s+='<polygon points="'+cats.map(function(c,i){return pt(i,lv).join(',');}).join(' ')+'" fill="none" class="gl"/>'; });
+  cats.forEach(function(c,i){ var p=pt(i,100),q=pt(i,118); s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'" class="gl"/><text x="'+q[0]+'" y="'+(q[1]+4)+'" text-anchor="middle" class="tk">'+c+'</text>'; });
+  series.forEach(function(se){ s+='<polygon points="'+se.vals.map(function(v,i){return pt(i,v).join(',');}).join(' ')+'" fill="'+se.color+'" fill-opacity=".18" stroke="'+se.color+'" stroke-width="1.6"/>'; });
+  return s+'</svg>';
+}
+var COURT='<svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="160" height="90" fill="var(--faint)"/><rect x="18" y="16" width="124" height="58" fill="none" stroke="var(--border)" stroke-width="1.5"/><line x1="80" y1="12" x2="80" y2="78" stroke="var(--muted)" stroke-width="2" opacity=".5"/><line x1="59" y1="16" x2="59" y2="74" stroke="var(--border)"/><line x1="101" y1="16" x2="101" y2="74" stroke="var(--border)"/></svg>';
+var PLAY='<span class="play"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>';
+
+/* sortable tables */
+var TSTATE={};
+function table(id,cols,rows,opt){
+  opt=opt||{};
+  var st=TSTATE[id]||{k:null,d:-1};
+  var data=rows.slice();
+  if(st.k){ data.sort(function(a,b){ var x=a[st.k],y=b[st.k]; if(x===null||x===undefined) return 1; if(y===null||y===undefined) return -1; if(typeof x==='string') return st.d*x.localeCompare(y,undefined,{numeric:true}); return st.d*(x-y); }); }
+  var h='<div class="scroll" data-tbl="'+id+'"><table><thead><tr>'+cols.map(function(c){ var s=opt.sort!==false&&c.k; return '<th'+(s?' class="sort" data-k="'+c.k+'" scope="col" tabindex="0"':' scope="col"')+(c.r?' style="text-align:right"':'')+'>'+c.l+(st.k===c.k?'<span class="arr">'+(st.d>0?'▲':'▼')+'</span>':'')+'</th>'; }).join('')+'</tr></thead><tbody>';
+  data.forEach(function(row){ var cls=(opt.sel&&opt.sel(row)?'sel ':'')+(opt.click?'click':''); h+='<tr class="'+cls+'"'+(opt.click?' data-row="'+row[opt.key]+'" tabindex="0"':'')+'>'+cols.map(function(c){ var v=c.f?c.f(row[c.k],row):(row[c.k]===null||row[c.k]===undefined?'—':row[c.k]); var tc=c.tone?c.tone(row[c.k],row):''; return '<td class="'+tc+'"'+(c.r?' style="text-align:right"':'')+'>'+v+'</td>'; }).join('')+'</tr>'; });
+  h+='</tbody></table></div>';
+  TABLES[id]={cols:cols,rows:rows,opt:opt};
+  return h;
+}
+var TABLES={};
+function rerenderTable(id){ var t=TABLES[id]; var el=document.querySelector('[data-tbl="'+id+'"]'); if(!t||!el) return; var tmp=document.createElement('div'); tmp.innerHTML=table(id,t.cols,t.rows,t.opt); el.replaceWith(tmp.firstChild); }
+document.addEventListener('click',function(ev){ var th=ev.target.closest('th.sort'); if(!th) return; var id=th.closest('[data-tbl]').getAttribute('data-tbl'); var k=th.getAttribute('data-k'); var st=TSTATE[id]||{k:null,d:-1}; TSTATE[id]= st.k===k?{k:k,d:-st.d}:{k:k,d:-1}; rerenderTable(id); });
+document.addEventListener('keydown',function(ev){ if((ev.key==='Enter'||ev.key===' ')&&ev.target.matches('th.sort')){ ev.preventDefault(); ev.target.click(); } });
+var toneSign=function(v){return v==null?'':(v>0?'pos':v<0?'neg':'');};
+
+/* ---------- views ---------- */
+var state={rot:null,player:null,hlPlayer:'all',hlActions:{},reel:[],cmpA:'#7',cmpB:'#8',m:10};
+
+var V={};
+V.summary=function(){
+  var h=head('Headline performance','ตัวเลขรวมจากทุก rally ที่ถูกแท็ก');
+  h+='<div class="stats">'+[
+    stat('Point Diff','+20','60–40 · 100 rallies','good'),
+    stat('Sideout %','43.9%','Pts won receiving'),
+    stat('Point Score %','71.2%','Pts won serving'),
+    stat('Hit %','+.186','21K · 8E · 70 TA'),
+    stat('Pass Rating','1.97','83% positive'),
+    stat('Serve Eff.','−0.02','7A · 8E','bad'),
+    stat('FBSO %','9.8%','Kill on 1st ball','bad'),
+    stat('Transition K%','35.3%','17 swings'),
+    stat('Aces Allowed','3','41 opp serves'),
+    stat('Blocks','4','15 touches'),
+    stat('Digs','22','4 errors'),
+    stat('Longest Run','11 / 7','us / opp')
+  ].join('')+'</div>';
+  h+='<div class="grid">'+panel('Per-set breakdown','แยกรายเซตตามลำดับไฟล์',table('sets',[
+    {k:'set',l:'SET'},{k:'score',l:'SCORE (TAGGED)'},{k:'rallies',l:'RALLIES',r:1},{k:'so',l:'SO %',f:function(v){return pc(v);},r:1},{k:'ps',l:'PS %',f:function(v){return pc(v);},r:1},
+    {k:'hit',l:'HIT % (K–E/TA)'},{k:'pass',l:'PASS (POS%)'},{k:'acese',l:'ACE / SE'},{k:'fbso',l:'FBSO %',f:function(v){return pc(v);},r:1},{k:'trans',l:'TRANS K% (SW)'},{k:'digs',l:'DIGS (ERR)'},{k:'run',l:'RUN US / OPP'}
+  ],SETS,{sort:false})+'<p class="note">สกอร์ Set 1 และ Set 3 ที่แท็กไว้ไม่ใช่สกอร์จบเซตปกติ อยู่ระหว่างตรวจกับใบบันทึกคะแนน</p>')+'</div>';
+  var g=cssv('green'),r=cssv('red');
+  h+='<div class="grid g3">'+
+    panel('How we scored','60 points',brow('Kill',20,33,g)+brow('Ace',7,12,g)+brow('Block',4,7,g)+brow('Opp Error',29,48,g))+
+    panel('How we lost points','40 pts · from our action tags',brow('Attack Error',8,20,r)+brow('Serve Error',8,20,r)+brow('Reception Error',3,8,r)+brow('Opp Earned',21,53,r))+
+    panel('Earned vs gifted','',
+      '<div class="bl brow"><div class="bl" style="display:flex;justify-content:space-between"><b>Points for</b><span class="m">60 pts</span></div><div class="split"><i style="width:51.7%;background:var(--green)"></i></div><div class="bl" style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted)"><span>31 earned</span><span>29 gifted</span></div></div>'+
+      '<div class="brow"><div style="display:flex;justify-content:space-between"><b>Points against</b><span class="m">40 pts</span></div><div class="split"><i style="width:52.5%;background:var(--red)"></i></div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted)"><span>21 earned</span><span>19 gifted</span></div></div>'+
+      '<div class="kv"><div>Avg rally length<b>3.5 contacts</b></div><div>Longest<b>16 contacts</b></div><div>Avg in wins<b style="color:var(--green)">3.6</b></div><div>Avg in losses<b style="color:var(--red)">3.5</b></div></div>')+
+  '</div>';
+  return h;
+};
+
+V.rotations=function(){
+  var sel=state.rot;
+  var h=head('Performance by setter rotation','แตะการ์ดหมุนเพื่อไฮไลท์ทั้งหน้า');
+  h+='<div class="rcards">'+ROT.map(function(r,i){ return '<button type="button" class="rcard" data-rot="'+i+'" aria-pressed="'+(sel===i)+'"><div class="rt"><span>'+r.r+'</span><span class="pill '+(r.pm<0?'neg':'pos')+'">'+sgn(r.pm)+'</span></div><div class="rs">'+r.pf+'–'+r.pa+'</div><div class="rm">SO '+Math.round(r.so[0]/r.so[1]*100)+'% · K '+Math.round(r.fbk)+'%</div></button>'; }).join('')+'</div>';
+  var cats=ROT.map(function(r){return r.r;});
+  h+='<div class="grid g2">'+
+    panel('Sideout % by rotation','แต้มที่ได้ตอนรับเสิร์ฟ · เส้นประ = เกณฑ์ 55%',vbar({cats:cats,vals:ROT.map(function(r){return r.so[0]/r.so[1]*100;}),min:0,max:100,ticks:[0,25,50,75,100],ft:function(v){return v+'%';},ref:55,sel:sel,color:function(){return cssv('green');},fv:function(v){return v.toFixed(1)+'%';},label:'Sideout % by rotation'}))+
+    panel('Point differential by rotation','',vbar({cats:cats,vals:ROT.map(function(r){return r.pm;}),min:-3,max:9,ticks:[-3,0,3,6,9],sel:sel,color:function(v){return v<0?cssv('red'):cssv('green');},fv:sgn,vl:true,label:'Point differential by rotation'}))+
+  '</div>';
+  h+='<div class="grid">'+panel('Rotation detail','คอลัมน์ ATTACK ATT. = จำนวนครั้งที่ตีในหมุนนั้น (รวม 70) ไม่ใช่จำนวนรับเสิร์ฟ',table('rot',[
+    {k:'r',l:'ROT'},{k:'pm',l:'+/−',f:function(v){return '<span class="pill '+(v<0?'neg':'pos')+'">'+sgn(v)+'</span>';}},{k:'pf',l:'PTS FOR',r:1},{k:'pa',l:'PTS AGAINST',r:1},
+    {k:'sop',l:'SIDEOUT',f:function(v,row){return pc(v)+' ('+row.so[0]+'/'+row.so[1]+')';}},{k:'swp',l:'SERVE WIN',f:function(v,row){return pc(v)+' ('+row.sw[0]+'/'+row.sw[1]+')';}},
+    {k:'fbk',l:'1ST BALL K%',f:function(v){return pc(v);},r:1},{k:'hit',l:'HIT%',f:hit,tone:toneSign,r:1},{k:'pass',l:'PASS',f:function(v){return v.toFixed(2);},r:1},{k:'ta',l:'ATTACK ATT.',r:1}
+  ],ROT.map(function(r){var o=Object.assign({},r);o.sop=r.so[0]/r.so[1]*100;o.swp=r.sw[0]/r.sw[1]*100;return o;}),{sel:function(row){return sel!=null&&row.r===ROT[sel].r;}}))+'</div>';
+  var gh='<div class="scroll"><table class="hgrid"><thead><tr><th scope="col">PLAYER</th>'+cats.map(function(c){return '<th scope="col">'+c+'</th>';}).join('')+'</tr></thead><tbody>'+
+    GRID.map(function(g){ return '<tr><td><b>'+g[0]+'</b></td>'+g[1].map(function(c,i){ var cl=sel===i?' class="colsel"':''; if(!c) return '<td'+cl+'><div class="cell">—</div></td>'; var v=c[0],k=v>=0.4?'p2':v>0?'p1':v<0?'n1':'z'; return '<td'+cl+'><div class="cell '+k+'">'+hit(v)+'<small>'+c[1]+' att</small></div></td>'; }).join('')+'</tr>'; }).join('')+
+    '</tbody></table></div>';
+  h+='<div class="grid">'+panel('Attacker hit % by rotation','ช่องเทา = ไม่มีลูกตี · ช่องที่ตี ≤ 4 ครั้งใช้เป็นสมมติฐานเท่านั้น',gh)+'</div>';
+  return h;
+};
+
+V.sideout=function(){
+  var h=head('Phase efficiency','รับเสิร์ฟแล้วเข้าทำได้ดีแค่ไหน และตอนเสิร์ฟแปลงเป็นแต้มได้แค่ไหน');
+  h+='<div class="stats">'+[stat('Sideout %','43.9%','Pts won receiving'),stat('Point Score %','71.2%','Pts won serving'),stat('FBSO %','9.8%','Kill on 1st ball','bad'),stat('1st Ball K%','17.4%','When we attack'),stat('Transition K%','35.3%','17 swings'),stat('3+ Pt Runs','8 / 7','us / opp')].join('')+'</div>';
+  var fb=[['Kill (FBSO)',4,10,cssv('green')],['In-play continued',16,39,cssv('green-soft')],['Attack error',3,7,cssv('orange')],['No swing (ace / passed off)',18,44,cssv('red')]];
+  var fbh='<div class="split" style="height:14px">'+fb.map(function(f){return '<i style="width:'+(f[1]/41*100)+'%;background:'+f[3]+'" title="'+f[0]+': '+f[1]+'"></i>';}).join('')+'</div>'+
+    fb.map(function(f){return '<div class="brow" style="margin:8px 0"><div class="bl"><span><i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:'+f[3]+';margin-right:8px"></i>'+f[0]+'</span><span class="m">'+f[1]+' · '+f[2]+'%</span></div></div>';}).join('')+
+    '<p class="note">"No swing" รวมทั้งแต้มฟรีที่ได้ (คู่เสิร์ฟเสีย) และแต้มที่เสีย (โดน ace) ควรแยกดูในคลังคลิปก่อนสรุป</p>';
+  h+='<div class="grid g21">'+panel('First-ball outcome','41 opp serves',fbh)+
+    panel('Phase comparison by rotation','',radar(ROT.map(function(r){return r.r;}),[{vals:ROT.map(function(r){return r.so[0]/r.so[1]*100;}),color:cssv('green')},{vals:ROT.map(function(r){return r.sw[0]/r.sw[1]*100;}),color:cssv('orange')}])+legend([['Sideout',cssv('green')],['Point Score',cssv('orange')]]))+'</div>';
+  h+='<div class="grid g2">'+panel('Phase split','Sideout vs serve',table('phase',[{k:'ph',l:'PHASE'},{k:'ral',l:'RALLIES',r:1},{k:'won',l:'PTS WON',r:1},{k:'wp',l:'WIN %',f:function(v){return pc(v);},r:1},{k:'hp',l:'HIT %',f:function(v){return pc(v);},r:1}],[{ph:'Sideout',ral:41,won:18,wp:43.9,hp:9.1},{ph:'Serve',ral:59,won:42,wp:71.2,hp:27.0}],{sort:false}))+
+    panel('Sideout breakdown by rotation','ATTEMPTS = จำนวนครั้งรับเสิร์ฟ (รวม 41)',table('sob',[{k:'r',l:'ROT'},{k:'att',l:'ATTEMPTS',r:1},{k:'w',l:'WINS',r:1},{k:'so',l:'SO %',f:function(v){return pc(v);},tone:function(v){return v<35?'neg':v>=55?'pos':'';},r:1},{k:'fbk',l:'FBK %',f:function(v){return pc(v);},r:1}],ROT.map(function(r){return {r:r.r,att:r.so[1],w:r.so[0],so:r.so[0]/r.so[1]*100,fbk:r.fbk};})))+'</div>';
+  return h;
+};
+
+V.attack=function(){
+  var h=head('Offensive efficiency','การกระจายบอล in-system vs out-of-system และการตีสวน');
+  h+='<div class="stats">'+[stat('In-System Hit','+.186','21K / 70 att'),stat('Out-of-System Hit','+.000','0K / 0 att',null,'ยังไม่ได้แท็ก'),stat('Transition K%','35.3%','After dig · 17 swings'),stat('Transition Hit','+.118','6K / 4E')].join('')+'</div>';
+  var sd=ATT.map(function(a){ var c=a.hit>=0.2?cssv('green'):a.hit>=0.1?cssv('orange'):cssv('red'); return '<div class="brow"><div class="bl"><span>'+a.p+'</span><span class="m">'+a.ta+' · '+Math.round(a.share)+'% · '+hit(a.hit)+'</span></div><div class="track"><i style="width:'+(a.share/21.4*100)+'%;background:'+c+'"></i></div></div>'; }).join('');
+  h+='<div class="grid g3">'+
+    panel('In vs Out of System','Hit % comparison',gbar({cats:['In-System','Out-of-System'],series:[{name:'Hit',vals:[18.6,0],color:cssv('green')},{name:'Kill',vals:[30.0,0],color:cssv('green-soft')}],min:0,max:32,ticks:[0,8,16,24,32],ft:function(v){return v+'%';},fv:function(v){return v.toFixed(1)+'%';},vl:true,h:230})+legend([['Hit',cssv('green')],['Kill',cssv('green-soft')]])+'<p class="note">Out-of-system ยังไม่มีข้อมูลเพราะไม่ได้แท็ก ไม่ได้แปลว่าไม่เคยเกิด</p>')+
+    panel('Set distribution','Share of attacks · สี = Hit % (เขียว ≥ .200, ส้ม .100–.199, แดง &lt; .100)',sd)+
+    panel('Pass → 1st ball kill funnel','ค่าประมาณจากกราฟ ต้องดูจำนวนครั้งจริงก่อนอ้าง',gbar({cats:['Perfect','Good','Poor'],series:[{name:'Kill %',vals:[29,13,0],color:cssv('green')},{name:'Hit %',vals:[29,-7,0],color:cssv('orange')}],min:-10,max:30,ticks:[-10,0,10,20,30],ft:function(v){return v+'%';},fv:function(v){return '≈'+v+'%';},vl:true,h:230})+legend([['Kill %',cssv('green')],['Hit %',cssv('orange')]]))+
+  '</div>';
+  h+='<div class="grid">'+panel('Attacker leaderboard','กดหัวคอลัมน์เพื่อเรียง',table('att',[{k:'p',l:'PLAYER'},{k:'k',l:'KILLS',r:1},{k:'e',l:'ERRORS',r:1},{k:'ta',l:'TA',r:1},{k:'hit',l:'HIT %',f:hit,tone:toneSign,r:1},{k:'kp',l:'KILL %',f:function(v){return pc(v);},r:1},{k:'ep',l:'ERR %',f:function(v){return pc(v);},r:1},{k:'share',l:'SHARE',f:function(v){return pc(v);},r:1}],ATT))+'</div>';
+  return h;
+};
+
+V.serve=function(){
+  var h=head('Serve pressure & reception quality','เสิร์ฟกดดันคู่ได้แค่ไหน และรับลูกแรกนิ่งแค่ไหน');
+  h+='<div class="stats">'+[stat('Pass Rating','1.97','35 attempts'),stat('Positive Pass %','82.9%','Perfect + Good'),stat('Aces','7','59 serves'),stat('Serve Eff.','−0.02','A − E per attempt','bad')].join('')+'</div>';
+  var parts=[{l:'Perfect (3)',n:8,c:cssv('green')},{l:'Good (2)',n:21,c:cssv('green-soft')},{l:'Poor (1)',n:3,c:cssv('orange')},{l:'Error (0)',n:3,c:cssv('red')}];
+  var dist='<div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">'+donut(parts,'1.97','35 att')+'<div style="flex:1;min-width:150px">'+parts.map(function(p){return '<div class="brow" style="margin:8px 0"><div class="bl"><span><i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:'+p.c+';margin-right:8px"></i>'+p.l+'</span><span class="m">'+p.n+' · '+Math.round(p.n/35*100)+'%</span></div></div>';}).join('')+'</div></div>';
+  h+='<div class="grid g21">'+panel('Passer leaderboard','ยอดรวมในตาราง 34 ครั้ง ทีมรับจริง 35 ครั้ง (#18 รับ 1 ครั้งไม่แสดงในตาราง)',table('pass',[{k:'p',l:'PLAYER'},{k:'att',l:'ATTEMPTS',r:1},{k:'rt',l:'RATING',f:function(v){return '<b>'+v.toFixed(2)+'</b>';},r:1},{k:'pos',l:'POS %',f:function(v){return v+'%';},r:1},{k:'pf',l:'PERFECT',r:1},{k:'gd',l:'GOOD',r:1},{k:'pr',l:'POOR',r:1},{k:'er',l:'ERROR',r:1}],PASSERS))+panel('Pass quality distribution','',dist)+'</div>';
+  h+='<div class="grid">'+panel('Server performance','PTS WON SERVING = แต้มที่ทีมได้ขณะคนนี้เสิร์ฟ (เครดิตรวมทั้งทีม)',table('srv',[{k:'p',l:'PLAYER'},{k:'att',l:'ATTEMPTS',r:1},{k:'a',l:'ACES',r:1},{k:'e',l:'ERRORS',r:1},{k:'ip',l:'IN PLAY',r:1},{k:'ap',l:'ACE %',f:function(v){return pc(v);},r:1},{k:'ep',l:'ERR %',f:function(v){return pc(v);},r:1},{k:'ef',l:'EFFECTIVENESS',f:function(v){return (v<0?'−':'+')+Math.abs(v).toFixed(2);},tone:toneSign,r:1},{k:'wp',l:'PTS WON SERVING',f:function(v,row){return row.won+' · '+pc(v);},r:1}],SERVERS))+'</div>';
+  return h;
+};
+
+V.defense=function(){
+  var h=head('Block, dig & transition','ขุด บล็อก และยืดเกมรับได้แค่ไหน');
+  h+='<div class="stats">'+[stat('Total Digs','22','successful only'),stat('Dig Errors','4',''),stat('Block Stuffs','4',''),stat('Block Contacts','15','all block contacts'),stat('Aces Allowed','3','41 opp serves'),stat('Avg Rally','3.5','Longest 16')].join('')+'</div>';
+  var dc=DEF.filter(function(d){return d.d+d.bs+d.bc>0;}).sort(function(a,b){return (b.d+b.bs+b.bc)-(a.d+a.bs+a.bc);});
+  var dch=dc.map(function(d){ var t=8; return '<div class="brow"><div class="bl"><span>'+d.p+'</span><span class="m">dig '+d.d+' · stuff '+d.bs+' · contact '+d.bc+'</span></div><div class="split" style="height:12px"><i style="width:'+(d.d/t*100)+'%;background:var(--green)"></i><i style="width:'+(d.bs/t*100)+'%;background:var(--orange)"></i><i style="width:'+(d.bc/t*100)+'%;background:var(--border)"></i></div></div>'; }).join('')+legend([['Digs',cssv('green')],['Block Stuffs',cssv('orange')],['Block Contacts',cssv('border')]]);
+  h+='<div class="grid g2">'+panel('Defender contribution','',dch)+
+    panel('Rally length outcomes','By contact count · ค่าประมาณจากกราฟต้นฉบับ',gbar({cats:['1–2','3–4','5–7','8–12','13+'],series:[{name:'Won',vals:[22,17,10,5,1],color:cssv('green')},{name:'Lost',vals:[15,12,10,2,0],color:cssv('red')}],min:0,max:24,ticks:[0,6,12,18,24],fv:function(v){return '≈'+v;},h:240})+legend([['Won',cssv('green')],['Lost',cssv('red')]]))+'</div>';
+  h+='<div class="grid">'+panel('Defender details','',table('def',[{k:'p',l:'PLAYER'},{k:'d',l:'DIGS',r:1},{k:'de',l:'DIG ERRORS',r:1},{k:'ds',l:'DIG SUCCESS %',f:function(v){return pc(v);},r:1},{k:'bs',l:'BLOCK STUFFS',r:1},{k:'bc',l:'BLOCK CONTACTS',r:1}],DEF))+'</div>';
+  return h;
+};
+
+V.players=function(){
+  var h=head('Player statistics','ผลงานรายคน · แตะแถวเพื่อเปิดการ์ดผู้เล่น');
+  h+='<div class="grid">'+panel('Box score','NET = แต้มที่ทำ − error ทุกชนิด ไม่ให้เครดิตงานรับ/ขุด/เซต จึงไม่ควรใช้จัดอันดับ libero หรือตัวเซต',table('box',[
+    {k:'p',l:'#'},{k:'pts',l:'PTS',f:function(v){return '<b>'+v+'</b>';},r:1},{k:'net',l:'NET',f:sgn,tone:toneSign,r:1},{k:'k',l:'K',r:1},{k:'e',l:'E',r:1},{k:'ta',l:'TA',r:1},{k:'hit',l:'HIT%',f:hit,r:1},{k:'kp',l:'KILL%',f:function(v){return v==null?'—':v+'%';},r:1},
+    {k:'sa',l:'SA',r:1},{k:'se',l:'SE',r:1},{k:'pass',l:'PASS',f:function(v){return v==null?'—':v.toFixed(2);},r:1},{k:'re',l:'RE',r:1},{k:'digs',l:'DIGS',r:1},{k:'bs',l:'BS',r:1},{k:'bt',l:'BT',r:1}
+  ],BOX,{click:true,key:'p',sel:function(row){return row.p===state.player;}})+playerCard())+'</div>';
+  var ts=BOX.filter(function(b){return b.pts>0;});
+  var tsh=ts.map(function(b){ return '<div class="brow"><div class="bl"><span>'+b.p+'</span><span class="m">'+b.pts+' pts</span></div><div class="split" style="height:12px"><i style="width:'+(b.k/7*100)+'%;background:var(--green)"></i><i style="width:'+(b.sa/7*100)+'%;background:var(--green-soft)"></i><i style="width:'+(b.bs/7*100)+'%;background:var(--orange)"></i></div></div>'; }).join('')+legend([['Kills',cssv('green')],['Aces',cssv('green-soft')],['Blocks',cssv('orange')]]);
+  h+='<div class="grid g2">'+panel('Top scorers','Kills + Aces + Block stuffs',tsh)+
+    panel('Net points (points − errors)','Player impact',vbar({cats:BOX.map(function(b){return b.p;}),vals:BOX.map(function(b){return b.net;}),min:-2,max:6,ticks:[-2,0,2,4,6],color:function(v){return v<0?cssv('red'):cssv('green');},fv:sgn,label:'Net points by player'}))+'</div>';
+  return h;
+};
+function playerCard(){
+  var p=state.player; if(!p) return '<p class="note">แตะแถวผู้เล่นเพื่อดูสรุปรายคน</p>';
+  var b=BOX.filter(function(x){return x.p===p;})[0], s=SERVERS.filter(function(x){return x.p===p;})[0], d=DEF.filter(function(x){return x.p===p;})[0];
+  var cells=[];
+  if(b.ta>0) cells.push(stat('ตี (Attack)',hit(b.hit),b.k+'K · '+b.e+'E · '+b.ta+' TA'+(b.ta<5?' · n น้อย':'')));
+  if(s) cells.push(stat('เสิร์ฟ',s.a+'A / '+s.e+'E',s.att+' ครั้ง · ทีมได้ '+s.won+' แต้ม'));
+  if(b.pass!=null) cells.push(stat('รับลูกแรก',b.pass.toFixed(2),'reception error '+b.re));
+  if(d) cells.push(stat('เกมรับ','dig '+d.d,'dig error '+d.de+' · block touch '+d.bc));
+  cells.push(stat('PTS / NET',b.pts+' / '+sgn(b.net),'NET ไม่นับงานรับ-ขุด-เซต'));
+  return '<div class="pcard"><h4>การ์ดผู้เล่น '+p+'</h4><div class="pgrid">'+cells.join('')+'</div><div style="margin-top:10px"><button type="button" class="btn primary" data-goclips="'+p+'">ดูคลิปของ '+p+'</button></div></div>';
+}
+
+V.highlights=function(){
+  var players=['all'].concat(BOX.map(function(b){return b.p;}));
+  var acts=Object.keys(ACTIONS);
+  var on=acts.filter(function(a){return state.hlActions[a];});
+  if(!on.length) on=acts;
+  var clips=[];
+  on.forEach(function(a){ Object.keys(ACTIONS[a]).forEach(function(p){ if(state.hlPlayer!=='all'&&state.hlPlayer!==p) return; var n=ACTIONS[a][p]; for(var i=1;i<=n;i++) clips.push({id:a+'|'+p+'|'+i,a:a,p:p,i:i,n:n}); }); });
+  var h=head('Highlights','คลังคลิปรายจังหวะ: กรองตามผู้เล่นและประเภทการเล่น แล้วเลือกคลิปเข้าไฮไลท์');
+  h+='<div class="filters"><label for="hlp" class="note" style="margin:0">ผู้เล่น</label><select id="hlp">'+players.map(function(p){return '<option value="'+p+'"'+(state.hlPlayer===p?' selected':'')+'>'+(p==='all'?'ทุกคน':p)+'</option>';}).join('')+'</select>'+
+    acts.map(function(a){return '<button type="button" class="chip" data-act="'+a+'" aria-pressed="'+(!!state.hlActions[a])+'">'+a+'</button>';}).join('')+'</div>';
+  h+='<p class="note" style="margin:-4px 0 12px">พบ '+clips.length+' คลิป · จำนวนคลิปตรงกับตัวเลขในรายงาน (kill อิงหน้า Attack = 21) · ภาพเป็นตัวอย่าง ไม่มีวิดีโอจริงในเดโมนี้</p>';
+  var grid=clips.length?'<div class="clips">'+clips.map(function(c){ var inReel=state.reel.indexOf(c.id)>-1; return '<article class="clip"><div class="thumb">'+COURT+PLAY+'</div><div class="cb"><div class="ct">'+c.a+' · '+c.p+'</div><div class="cs">คลิป '+c.i+' จาก '+c.n+'</div><button type="button" data-clip="'+c.id+'" aria-pressed="'+inReel+'">'+(inReel?'อยู่ในไฮไลท์แล้ว':'เพิ่มในไฮไลท์')+'</button></div></article>'; }).join('')+'</div>':'<p class="note">ไม่มีคลิปตามตัวกรองนี้ ลองเลือกผู้เล่นหรือประเภทการเล่นอื่น</p>';
+  var reel='<section class="panel reel"><h3>ไฮไลท์ของฉัน</h3><p class="ps">'+state.reel.length+' คลิป</p>'+(state.reel.length?'<ol>'+state.reel.map(function(id){var x=id.split('|');return '<li>'+x[0]+' · '+x[1]+' (คลิป '+x[2]+')</li>';}).join('')+'</ol>':'<p class="note">ยังไม่มีคลิป กด "เพิ่มในไฮไลท์" ที่คลิปที่ต้องการ</p>')+
+    '<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button type="button" class="btn primary" disabled title="เดโม: ระบบจริงจะรวมคลิปเป็นวิดีโอเดียว">สร้างวิดีโอไฮไลท์</button><button type="button" class="btn" id="clearReel"'+(state.reel.length?'':' disabled')+'>ล้าง</button></div><p class="note">ในระบบจริง ปุ่มนี้รวมคลิปที่เลือกเป็นวิดีโอเดียวสำหรับแชร์</p></section>';
+  h+='<div class="grid g21"><div>'+grid+'</div>'+reel+'</div>';
+  return h;
+};
+
+V.insights=function(){
+  var gifted=29/60, gap=71.2-43.9;
+  var sc=[
+    {on:gifted>=0.4,k:'A',t:'ชนะแบบได้เปรียบ',ev:'แต้มจากคู่พลาด '+Math.round(gifted*100)+'% ของแต้มที่ได้ (เกณฑ์เตือน ≥ 40%)',do:'อย่าใช้ผลนี้เป็นมาตรฐาน ไปดูหมุนที่ยังติดลบก่อนเจอทีมที่นิ่งกว่า'},
+    {on:gap>=15,k:'B',t:'ชนะด้วยเสิร์ฟ ไม่ใช่ระบบรับ-บุก',ev:'Point Score 71.2% สูงกว่า Sideout 43.9% อยู่ '+gap.toFixed(1)+' จุด',do:'เสิร์ฟคือจุดแข็งอยู่แล้ว เวลาซ้อมส่วนใหญ่ควรลงที่ตอนรับ'},
+    {on:(1.97>=1.9&&82.9>=75&&9.8<20),k:'C',t:'รับดีแต่จบแต้มไม่ลง',ev:'Pass 1.97 · positive 82.9% แต่ FBSO 9.8%',do:'ไม่ต้องเพิ่มการซ้อมรับ ฝึกจังหวะเซตและการเลือกช็อตแทน'}
+  ];
+  var h=head('Coach Insights','ระบบอ่านรูปแบบจากตัวเลขให้อัตโนมัติ โค้ชเป็นผู้ตัดสินใจขั้นสุดท้าย');
+  h+='<div class="scn">'+sc.map(function(s){return '<div class="sc'+(s.on?' on':'')+'"><div class="badge'+(s.on?'':' off')+'">Scenario '+s.k+(s.on?' · พบในแมตช์นี้':' · ไม่พบ')+'</div><h4>'+s.t+'</h4><p class="ev">'+s.ev+'</p><p><b>ทำต่อ:</b> '+s.do+'</p></div>';}).join('')+'</div>';
+  h+='<div class="grid g21">'+panel('แต้มมาจากสองบัญชี','Net = แต้มได้ − แต้มเสียในแต่ละ phase · รวม: รับ −5, เสิร์ฟ +25 = +20',
+      gbar({cats:LEDGER.map(function(l){return l.r;}),series:[{name:'Receive (sideout)',vals:LEDGER.map(function(l){return l.recv;}),color:cssv('red')},{name:'Serve (break)',vals:LEDGER.map(function(l){return l.serve;}),color:cssv('green')}],min:-8,max:8,ticks:[-8,-4,0,4,8],ft:function(v){return v>0?'+'+v:''+v;},fv:sgn,vl:true,h:260})+legend([['Receive (sideout)',cssv('red')],['Serve (break)',cssv('green')]])+'<p class="note">R1 หมุนเดียวติดลบ 8 ในบัญชีรับ ขณะอีก 5 หมุนรวมกัน +3</p>')+
+    panel('โฟกัสสัปดาห์นี้','',
+      '<ol style="margin:0;padding-left:20px;font-size:13.5px"><li><b>รับเสิร์ฟ R1</b>: SO 27.8% → เป้า 45% (≈ +3 แต้ม/แมตช์)</li><li style="margin-top:8px"><b>จบลูกแรก</b>: FBSO 9.8% → เป้า 25% (≈ +3)</li><li style="margin-top:8px"><b>ลด serve error</b>: 8 → 6 (≈ +1.6)</li><li style="margin-top:8px"><b>กระจายบอล</b>: ย้าย 5 ลูกไป #9 (≈ +2 net)</li></ol><p class="note">ค่าประมาณเพื่อจัดลำดับ ไม่ใช่การพยากรณ์ ข้อ 1 กับ 2 ทับซ้อนกันบางส่วน</p>')+'</div>';
+  var opts=ATT.map(function(a){return a.p;});
+  var sel=function(id,v){return '<select id="'+id+'">'+opts.map(function(o){return '<option'+(o===v?' selected':'')+'>'+o+'</option>';}).join('')+'</select>';};
+  h+='<div class="grid">'+panel('เทียบผู้เล่นที่จำนวนครั้งไม่เท่ากัน','ถ่วงด้วยลูกสมมติที่ผลเท่าค่าเฉลี่ยทีม (Hit % ทีม '+hit(TEAM_HIT)+')',
+    '<div class="tool"><div><label for="cmpA">ผู้เล่น A</label>'+sel('cmpA',state.cmpA)+'</div><div><label for="cmpB">ผู้เล่น B</label>'+sel('cmpB',state.cmpB)+'</div><div><label for="mval">ลูกสมมติ: <b id="mout">'+state.m+'</b></label><input type="range" id="mval" min="0" max="20" step="1" value="'+state.m+'"></div></div><div id="cmpRes"></div>')+'</div>';
+  return h;
+};
+function cmpResult(){
+  var el=document.getElementById('cmpRes'); if(!el) return;
+  var A=ATT.filter(function(a){return a.p===state.cmpA;})[0], B=ATT.filter(function(a){return a.p===state.cmpB;})[0], m=state.m;
+  var adj=function(a){return ((a.k-a.e)+m*TEAM_HIT)/(a.ta+m);};
+  var zone=function(n){return n<5?'n < 5 ยังไม่ควรเทียบ':n<10?'n 5–9 ใช้เป็นสมมติฐาน':'n ≥ 10 เทียบได้';};
+  var dA=adj(A), dB=adj(B), diff=Math.abs(dA-dB);
+  var v=diff<0.05?'หลังถ่วงแล้วต่างกันไม่ถึง .050 จึงยังแยกไม่ออก เก็บข้อมูลเพิ่มอีก 2–3 นัด':(dA>dB?A.p:B.p)+' ดีกว่าหลังถ่วง ต่างกัน '+diff.toFixed(3).replace(/^0/,'')+' ควรเปิดคลิปยืนยันก่อนสรุป';
+  el.innerHTML='<div class="res">'+[A,B].map(function(a,i){var d=i?dB:dA;return stat(a.p+' · ตี '+a.ta+' ครั้ง','<span>'+hit(d)+'</span><small>ดิบ '+hit(a.hit)+'</small>',zone(a.ta));}).join('')+'</div><div class="verdict">'+v+'</div><p class="note">สูตร: (kill − error + ลูกสมมติ × Hit % ทีม) ÷ (จำนวนครั้ง + ลูกสมมติ) · เป็นเทคนิคสถิติทั่วไป ค่าที่ได้คือประมาณการแบบระวังไว้ก่อน</p>';
+}
+
+/* ---------- shell ---------- */
+var TABS=[['summary','Summary'],['rotations','Rotations'],['sideout','Sideout'],['attack','Attack'],['serve','Serve & Pass'],['defense','Defense'],['players','Players'],['highlights','Highlights'],['insights','Coach Insights']];
+var tabsEl=document.getElementById('tabs'), view=document.getElementById('view'), current='summary';
+tabsEl.innerHTML=TABS.map(function(t){return '<button type="button" role="tab" class="tab'+(t[0]==='highlights'||t[0]==='insights'?' extra':'')+'" id="tab-'+t[0]+'" aria-controls="view" aria-selected="false" data-tab="'+t[0]+'">'+t[1]+'</button>';}).join('');
+function show(tab,keepScroll){
+  if(!V[tab]) tab='summary';
+  current=tab;
+  view.innerHTML=V[tab]();
+  view.setAttribute('aria-labelledby','tab-'+tab);
+  Array.prototype.forEach.call(tabsEl.children,function(b){b.setAttribute('aria-selected',b.getAttribute('data-tab')===tab?'true':'false');});
+  if(tab==='insights') cmpResult();
+  if(!keepScroll) window.scrollTo(0,0);
+  if(location.hash!=='#'+tab){ try{history.replaceState(null,'','#'+tab);}catch(e){} }
+}
+tabsEl.addEventListener('click',function(e){var b=e.target.closest('[data-tab]'); if(b) show(b.getAttribute('data-tab'));});
+tabsEl.addEventListener('keydown',function(e){ if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft') return; var i=TABS.findIndex(function(t){return t[0]===current;}); i=(i+(e.key==='ArrowRight'?1:-1)+TABS.length)%TABS.length; show(TABS[i][0]); document.getElementById('tab-'+TABS[i][0]).focus(); });
+
+view.addEventListener('click',function(e){
+  var t;
+  if((t=e.target.closest('[data-rot]'))){ var i=+t.getAttribute('data-rot'); state.rot=state.rot===i?null:i; show('rotations',true); return; }
+  if((t=e.target.closest('tr[data-row]'))){ var p=t.getAttribute('data-row'); state.player=state.player===p?null:p; show('players',true); return; }
+  if((t=e.target.closest('[data-goclips]'))){ state.hlPlayer=t.getAttribute('data-goclips'); state.hlActions={}; show('highlights'); return; }
+  if((t=e.target.closest('[data-act]'))){ var a=t.getAttribute('data-act'); state.hlActions[a]=!state.hlActions[a]; show('highlights',true); return; }
+  if((t=e.target.closest('[data-clip]'))){ var id=t.getAttribute('data-clip'), k=state.reel.indexOf(id); if(k>-1) state.reel.splice(k,1); else state.reel.push(id); show('highlights',true); return; }
+  if(e.target.id==='clearReel'){ state.reel=[]; show('highlights',true); }
+});
+view.addEventListener('keydown',function(e){ if((e.key==='Enter'||e.key===' ')&&e.target.matches('tr[data-row]')){ e.preventDefault(); e.target.click(); } });
+view.addEventListener('change',function(e){
+  if(e.target.id==='hlp'){ state.hlPlayer=e.target.value; show('highlights',true); }
+  if(e.target.id==='cmpA'){ state.cmpA=e.target.value; cmpResult(); }
+  if(e.target.id==='cmpB'){ state.cmpB=e.target.value; cmpResult(); }
+});
+view.addEventListener('input',function(e){ if(e.target.id==='mval'){ state.m=+e.target.value; document.getElementById('mout').textContent=state.m; cmpResult(); } });
+
+/* theme */
+var root=document.documentElement, themeBtn=document.getElementById('themeBtn');
+function isDark(){ var t=root.getAttribute('data-theme'); if(t) return t==='dark'; return window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches; }
+function paintBtn(){ themeBtn.textContent=isDark()?'ธีมสว่าง':'ธีมมืด'; }
+try{ var saved=localStorage.getItem('match-demo-theme'); if(saved==='dark'||saved==='light') root.setAttribute('data-theme',saved); }catch(e){}
+paintBtn();
+themeBtn.addEventListener('click',function(){ var next=isDark()?'light':'dark'; root.setAttribute('data-theme',next); try{localStorage.setItem('match-demo-theme',next);}catch(e){} paintBtn(); });
+
+show((location.hash||'#summary').slice(1));
+window.addEventListener('hashchange',function(){ var t=location.hash.slice(1); if(t&&t!==current&&V[t]) show(t); });
+})();
+</script>
+</body>
+</html>
